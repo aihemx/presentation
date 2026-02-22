@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة الأتمتة الذكية</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0F172A',
+                        secondary: '#2563EB',
+                        accent: '#22C55E',
+                        highlight: '#7C3AED',
+                        lightbg: '#F8FAFC',
+                        darktext: '#111827'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Cairo', sans-serif; overflow: hidden; background-color: #0F172A; }
+        .slide {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .slide.active { display: flex; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-btn {
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover {
+            transform: scale(1.1);
+            background-color: rgba(37, 99, 235, 0.8);
+        }
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="text-darktext antialiased">
+
+    <!-- Progress Bar -->
+    <div class="fixed top-0 left-0 h-1 bg-secondary z-50 transition-all duration-300" id="progress-bar" style="width: 0%;"></div>
+
+    <!-- Navigation Controls -->
+    <div class="fixed bottom-6 left-6 z-50 flex gap-4 rtl:flex-row-reverse">
+        <button onclick="prevSlide()" class="nav-btn bg-primary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center border border-gray-700">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <button onclick="nextSlide()" class="nav-btn bg-secondary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    </div>
+    <div class="fixed bottom-8 right-8 z-50 text-gray-400 font-bold text-lg" id="slide-counter">1 / 18</div>
+
+    <!-- ==================== SLIDES ==================== -->
+
+    <!-- Slide 1: Cover -->
+    <section class="slide active flex-col justify-center items-center bg-primary relative text-white" id="slide-1">
+        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#2563EB 1px, transparent 1px); background-size: 30px 30px;"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-primary via-primary to-highlight opacity-50"></div>
+        
+        <div class="z-10 text-center animate-slide-up max-w-4xl px-4">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-highlight/20 text-highlight mb-6 shadow-[0_0_30px_rgba(124,58,237,0.5)]">
+                <i class="fas fa-robot text-4xl"></i>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight tracking-tight">منظومة الأتمتة الذكية لإدارة العمليات والتسويق والمبيعات</h1>
+            <p class="text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
+                حل متكامل يعتمد على الأتمتة والذكاء الاصطناعي لربط العمليات اليومية، التسويق، العملاء، والمحاسبة في نظام واحد يعمل تلقائياً.
+            </p>
+        </div>
+    </section>
+
+    <!-- Slide 2: The Problem -->
+    <section class="slide bg-lightbg flex-col justify-center items-center p-8 md:p-16" id="slide-2">
+        <div class="max-w-6xl w-full animate-slide-up">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-primary mb-4">المشكلة التي نعالجها</h2>
+                <p class="text-gray-500 text-lg">العمل التقليدي يستنزف الموارد ويقلل الكفاءة</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start gap-4">
+                    <div class="bg-red-100 text-red-500 p-3 rounded-lg"><i class="fas fa-hand-paper text-xl"></i></div>
+                    <div><h3 class="font-bold text-lg mb-1">تكرار الأعمال اليدوية</h3><p class="text-sm text-gray-500">استنزاف وقت الموظفين في مهام يمكن أتمتتها.</p></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start gap-4">
+                    <div class="bg-red-100 text-red-500 p-3 rounded-lg"><i class="fas fa-users-slash text-xl"></i></div>
+                    <div><h3 class="font-bold text-lg mb-1">ضياع العملاء</h3><p class="text-sm text-gray-500">عدم المتابعة الدقيقة يؤدي لفقدان فرص بيعية.</p></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start gap-4">
+                    <div class="bg-red-100 text-red-500 p-3 rounded-lg"><i class="fas fa-clock text-xl"></i></div>
+                    <div><h3 class="font-bold text-lg mb-1">تأخر الردود</h3><p class="text-sm text-gray-500">بطء التفاعل على منصات التواصل الاجتماعي.</p></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start gap-4">
+                    <div class="bg-red-100 text-red-500 p-3 rounded-lg"><i class="fas fa-file-invoice-dollar text-xl"></i></div>
+                    <div><h3 class="font-bold text-lg mb-1">ضعف تنظيم الفواتير</h3><p class="text-sm text-gray-500">فوضى في إدارة الاشتراكات والمطالبات.</p></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start gap-4">
+                    <div class="bg-red-100 text-red-500 p-3 rounded-lg"><i class="fas fa-brain text-xl"></i></div>
+                    <div><h3 class="font-bold text-lg mb-1">نسيان المهام</h3><p class="text-sm text-gray-500">عدم وجود نظام تذكير ومتابعة صارم.</p></div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start gap-4">
+                    <div class="bg-red-100 text-red-500 p-3 rounded-lg"><i class="fas fa-database text-xl"></i></div>
+                    <div><h3 class="font-bold text-lg mb-1">ضياع بيانات Leads</h3><p class="text-sm text-gray-500">تشتت بيانات العملاء المحتملين.</p></div>
+                </div>
+            </div>
+
+            <div class="bg-red-50 border-r-4 border-red-500 p-6 rounded-lg text-center shadow-md">
+                <p class="text-xl text-red-700 font-bold">النتيجة: وقت مهدور – أخطاء بشرية – مبيعات ضائعة</p>
+                <p class="text-sm text-red-500 mt-2">"حتى 60% من وقت الفرق يضيع في مهام متكررة"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Concept -->
+    <section class="slide bg-white flex-col justify-center items-center p-8 md:p-16" id="slide-3">
+        <div class="max-w-5xl w-full animate-slide-up text-center">
+            <h2 class="text-4xl font-bold text-primary mb-8">فكرة النظام ببساطة</h2>
+            <p class="text-xl text-gray-600 mb-12">منظومة تقوم بربط كل أدوات الشركة معًا، وتحوّل المهام المتكررة إلى عمليات تعمل تلقائياً بدون تدخل بشري.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-400 mb-6 line-through">بدلاً من...</h3>
+                    <ul class="space-y-4 text-right">
+                        <li class="flex items-center gap-3 text-gray-500"><i class="fas fa-times text-red-400"></i> موظف ينسخ بيانات</li>
+                        <li class="flex items-center gap-3 text-gray-500"><i class="fas fa-times text-red-400"></i> موظف يرسل تذكير</li>
+                        <li class="flex items-center gap-3 text-gray-500"><i class="fas fa-times text-red-400"></i> موظف يرد على التعليقات</li>
+                        <li class="flex items-center gap-3 text-gray-500"><i class="fas fa-times text-red-400"></i> موظف يبحث عن عملاء</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-secondary to-highlight p-8 rounded-3xl shadow-xl text-white transform scale-105">
+                    <h3 class="text-2xl font-bold mb-6">النظام الآلي</h3>
+                    <div class="flex flex-col items-center justify-center space-y-4">
+                        <i class="fas fa-cogs text-5xl mb-2 animate-spin-slow"></i>
+                        <p class="text-xl text-center font-bold">النظام يقوم بكل ذلك أوتوماتيكياً في ثوانٍ</p>
+                        <span class="bg-white/20 px-4 py-2 rounded-full text-sm mt-4">كفاءة 100% | 0% أخطاء</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: How it works -->
+    <section class="slide bg-lightbg flex-col justify-center items-center p-8 md:p-16" id="slide-4">
+        <div class="max-w-6xl w-full animate-slide-up">
+            <h2 class="text-4xl font-bold text-center text-primary mb-16">كيف يعمل النظام؟</h2>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center relative">
+                <!-- Line connecting steps (Desktop) -->
+                <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -z-10 transform -translate-y-1/2"></div>
+                
+                <!-- Step 1 -->
+                <div class="flex flex-col items-center mb-8 md:mb-0 bg-white p-6 rounded-full shadow-lg w-48 h-48 justify-center border-4 border-gray-100 z-10 relative group">
+                    <div class="absolute -top-4 -right-4 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">1</div>
+                    <i class="fas fa-sign-in-alt text-4xl text-gray-400 mb-3 group-hover:text-secondary transition-colors"></i>
+                    <h3 class="font-bold text-center">المدخلات</h3>
+                    <p class="text-xs text-center text-gray-500 mt-2">رسائل، نماذج، بيانات</p>
+                </div>
+                
+                <!-- Arrow Mobile -->
+                <i class="fas fa-arrow-down text-2xl text-secondary md:hidden mb-8"></i>
+
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center mb-8 md:mb-0 bg-white p-6 rounded-full shadow-lg w-48 h-48 justify-center border-4 border-highlight z-10 relative group">
+                    <div class="absolute -top-4 -right-4 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">2</div>
+                    <i class="fas fa-brain text-4xl text-highlight mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-center text-highlight">التحليل بـ AI</h3>
+                    <p class="text-xs text-center text-gray-500 mt-2">فهم السياق والمحتوى</p>
+                </div>
+
+                <!-- Arrow Mobile -->
+                <i class="fas fa-arrow-down text-2xl text-secondary md:hidden mb-8"></i>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center mb-8 md:mb-0 bg-white p-6 rounded-full shadow-lg w-48 h-48 justify-center border-4 border-gray-100 z-10 relative group">
+                    <div class="absolute -top-4 -right-4 bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">3</div>
+                    <i class="fas fa-project-diagram text-4xl text-gray-400 mb-3 group-hover:text-secondary transition-colors"></i>
+                    <h3 class="font-bold text-center">اتخاذ القرار</h3>
+                    <p class="text-xs text-center text-gray-500 mt-2">تحديد الإجراء المناسب</p>
+                </div>
+
+                <!-- Arrow Mobile -->
+                <i class="fas fa-arrow-down text-2xl text-secondary md:hidden mb-8"></i>
+
+                <!-- Step 4 -->
+                <div class="flex flex-col items-center bg-primary text-white p-6 rounded-full shadow-lg w-48 h-48 justify-center border-4 border-accent z-10 relative group transform hover:scale-105 transition-all">
+                    <div class="absolute -top-4 -right-4 bg-accent text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">4</div>
+                    <i class="fas fa-rocket text-4xl text-accent mb-3"></i>
+                    <h3 class="font-bold text-center">التنفيذ الآلي</h3>
+                    <p class="text-xs text-center text-gray-300 mt-2">رد، إشعار، محاسبة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Tech Stack -->
+    <section class="slide bg-white flex-col justify-center items-center p-8 md:p-16" id="slide-5">
+        <div class="max-w-6xl w-full animate-slide-up">
+            <h2 class="text-4xl font-bold text-center text-primary mb-4">مكونات النظام الأساسية</h2>
+            <p class="text-center text-gray-500 mb-12">يعتمد النظام على ترسانة من أقوى الأدوات المترابطة عالمياً</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+                <!-- Stack Items -->
+                <div class="bg-lightbg p-5 rounded-2xl flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow border border-gray-100">
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/n8n-3628945-3030170.png" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzI1NjNFQiIgZD0iTTEyIDJMMiA3bDEwIDUgMTAtNS0xMC01ek0yIDE3bDEwIDUgMTAtNXYtNWwtMTAgNS0xMC01djV6Ii8+PC9zdmc+';" class="w-12 h-12 mb-3 opacity-80" alt="n8n">
+                    <h4 class="font-bold text-primary">n8n</h4>
+                    <p class="text-xs text-gray-500 mt-1">المحرك الأساسي للأتمتة</p>
+                </div>
+                
+                <div class="bg-lightbg p-5 rounded-2xl flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow border border-gray-100">
+                    <i class="fab fa-google text-4xl text-green-600 mb-3"></i>
+                    <h4 class="font-bold text-primary">Google Sheets</h4>
+                    <p class="text-xs text-gray-500 mt-1">قاعدة البيانات الديناميكية</p>
+                </div>
+                
+                <div class="bg-lightbg p-5 rounded-2xl flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow border border-gray-100">
+                    <i class="fab fa-telegram text-4xl text-blue-500 mb-3"></i>
+                    <h4 class="font-bold text-primary">Telegram Bots</h4>
+                    <p class="text-xs text-gray-500 mt-1">واجهة التحكم السريعة</p>
+                </div>
+                
+                <div class="bg-lightbg p-5 rounded-2xl flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow border border-gray-100">
+                    <i class="fab fa-whatsapp text-4xl text-green-500 mb-3"></i>
+                    <h4 class="font-bold text-primary">WhatsApp API</h4>
+                    <p class="text-xs text-gray-500 mt-1">التواصل المباشر مع العملاء</p>
+                </div>
+                
+                <div class="bg-lightbg p-5 rounded-2xl flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow border border-gray-100">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" class="w-12 h-12 mb-3" alt="OpenAI">
+                    <h4 class="font-bold text-primary">OpenAI</h4>
+                    <p class="text-xs text-gray-500 mt-1">العقل المدبر للتحليل والتوليد</p>
+                </div>
+                
+                <div class="bg-lightbg p-5 rounded-2xl flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow border border-gray-100">
+                    <i class="fab fa-facebook text-4xl text-blue-600 mb-3"></i>
+                    <h4 class="font-bold text-primary">Facebook API</h4>
+                    <p class="text-xs text-gray-500 mt-1">إدارة التعليقات والمحتوى</p>
+                </div>
+
+                <div class="bg-lightbg p-5 rounded-2xl flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow border border-gray-100">
+                    <i class="fas fa-spider text-4xl text-gray-700 mb-3"></i>
+                    <h4 class="font-bold text-primary">Apify</h4>
+                    <p class="text-xs text-gray-500 mt-1">استخراج البيانات (Scraping)</p>
+                </div>
+
+                <div class="bg-lightbg p-5 rounded-2xl flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow border border-gray-100">
+                    <i class="fas fa-layer-group text-4xl text-highlight mb-3"></i>
+                    <h4 class="font-bold text-primary">Vector Database</h4>
+                    <p class="text-xs text-gray-500 mt-1">ذاكرة النظام والمعرفة</p>
+                </div>
+
+                <div class="bg-lightbg p-5 rounded-2xl flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow border border-gray-100">
+                    <i class="fas fa-bolt text-4xl text-yellow-500 mb-3"></i>
+                    <h4 class="font-bold text-primary">Webhooks</h4>
+                    <p class="text-xs text-gray-500 mt-1">الربط اللحظي بين الأنظمة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide Templates Function (For slides 6-13 to maintain consistency) -->
+    <!-- I will manually create them to ensure full control over icons and text -->
+
+    <!-- Slide 6: Smart Accountant -->
+    <section class="slide bg-lightbg flex-col justify-center items-center p-8 md:p-16" id="slide-6">
+        <div class="max-w-5xl w-full flex flex-col md:flex-row gap-12 items-center bg-white p-10 rounded-3xl shadow-lg border border-gray-100 animate-slide-up">
+            <!-- Right Side -->
+            <div class="md:w-1/3 flex flex-col items-center text-center border-b md:border-b-0 md:border-l border-gray-200 pb-8 md:pb-0 md:pl-8">
+                <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-calculator text-5xl text-secondary"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-primary mb-2">المحاسب الذكي</h2>
+                <span class="text-xs font-bold text-highlight bg-highlight/10 px-3 py-1 rounded-full">Automated Workflow</span>
+            </div>
+            
+            <!-- Left Side -->
+            <div class="md:w-2/3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">تحويل الرسائل إلى قيود تلقائياً</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">إدارة شجرة الحسابات</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">تحديث العمليات مباشرة</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">تصفير الأخطاء البشرية</p></div>
+                </div>
+                <div class="bg-accent/10 border-r-4 border-accent p-4 rounded-lg">
+                    <p class="text-accent font-bold text-lg"><i class="fas fa-briefcase ml-2"></i> مثالي للشركات التي تعتمد على التسجيل اليدوي أو الإكسل، يوفر 70% من وقت التسجيل.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7: Subscription Manager -->
+    <section class="slide bg-lightbg flex-col justify-center items-center p-8 md:p-16" id="slide-7">
+        <div class="max-w-5xl w-full flex flex-col md:flex-row gap-12 items-center bg-white p-10 rounded-3xl shadow-lg border border-gray-100 animate-slide-up">
+            <div class="md:w-1/3 flex flex-col items-center text-center border-b md:border-b-0 md:border-l border-gray-200 pb-8 md:pb-0 md:pl-8">
+                <div class="w-24 h-24 bg-purple-50 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-sync-alt text-5xl text-highlight"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-primary mb-2">مدير الاشتراكات</h2>
+                <span class="text-xs font-bold text-highlight bg-highlight/10 px-3 py-1 rounded-full">Automated Workflow</span>
+            </div>
+            <div class="md:w-2/3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">مراقبة الاشتراكات النشطة</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">إشعار تلقائي عند الانتهاء</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">إرسال بريد/واتساب احترافي</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">الحد من فقدان العملاء (Churn)</p></div>
+                </div>
+                <div class="bg-accent/10 border-r-4 border-accent p-4 rounded-lg">
+                    <p class="text-accent font-bold text-lg"><i class="fas fa-chart-line ml-2"></i> يحوّل الاشتراكات المنتهية إلى فرص تجديد تلقائية ومضمونة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: Smart Page Manager -->
+    <section class="slide bg-lightbg flex-col justify-center items-center p-8 md:p-16" id="slide-8">
+        <div class="max-w-5xl w-full flex flex-col md:flex-row gap-12 items-center bg-white p-10 rounded-3xl shadow-lg border border-gray-100 animate-slide-up">
+            <div class="md:w-1/3 flex flex-col items-center text-center border-b md:border-b-0 md:border-l border-gray-200 pb-8 md:pb-0 md:pl-8">
+                <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-comments text-5xl text-secondary"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-primary mb-2">مدير الصفحة الذكي</h2>
+                <span class="text-xs font-bold text-highlight bg-highlight/10 px-3 py-1 rounded-full">Automated Workflow</span>
+            </div>
+            <div class="md:w-2/3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">قراءة تعليقات السوشيال ميديا</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">الرد تلقائياً باحترافية وسياق</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">التفاعل بنفس لهجة/لغة العميل</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">حماية صورة الشركة (إخفاء الشتائم)</p></div>
+                </div>
+                <div class="bg-accent/10 border-r-4 border-accent p-4 rounded-lg">
+                    <p class="text-accent font-bold text-lg"><i class="fas fa-bullseye ml-2"></i> سرعة رد فورية (0 ثانية) = ثقة أعلى = تحويلات ومبيعات أكثر.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 9: Smart Content Creator -->
+    <section class="slide bg-lightbg flex-col justify-center items-center p-8 md:p-16" id="slide-9">
+        <div class="max-w-5xl w-full flex flex-col md:flex-row gap-12 items-center bg-white p-10 rounded-3xl shadow-lg border border-gray-100 animate-slide-up">
+            <div class="md:w-1/3 flex flex-col items-center text-center border-b md:border-b-0 md:border-l border-gray-200 pb-8 md:pb-0 md:pl-8">
+                <div class="w-24 h-24 bg-pink-50 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-pen-nib text-5xl text-pink-500"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-primary mb-2">صانع المحتوى الذكي</h2>
+                <span class="text-xs font-bold text-highlight bg-highlight/10 px-3 py-1 rounded-full">Automated Workflow</span>
+            </div>
+            <div class="md:w-2/3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">توليد أفكار سكربتات وفيديو</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">كتابة Hook (خطاف) احترافي</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">صياغة الدعوة لاتخاذ إجراء (CTA)</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">تنظيم المحتوى حسب المنتج</p></div>
+                </div>
+                <div class="bg-accent/10 border-r-4 border-accent p-4 rounded-lg">
+                    <p class="text-accent font-bold text-lg"><i class="fas fa-mobile-alt ml-2"></i> يختصر وقت فريق التسويق بنسبة 80% في مرحلة الإعداد والتأليف.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 10: AI Content Planner -->
+    <section class="slide bg-lightbg flex-col justify-center items-center p-8 md:p-16" id="slide-10">
+        <div class="max-w-5xl w-full flex flex-col md:flex-row gap-12 items-center bg-white p-10 rounded-3xl shadow-lg border border-gray-100 animate-slide-up">
+            <div class="md:w-1/3 flex flex-col items-center text-center border-b md:border-b-0 md:border-l border-gray-200 pb-8 md:pb-0 md:pl-8">
+                <div class="w-24 h-24 bg-indigo-50 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-calendar-alt text-5xl text-indigo-500"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-primary mb-2">المخطط الاستراتيجي</h2>
+                <span class="text-xs font-bold text-highlight bg-highlight/10 px-3 py-1 rounded-full">Automated Workflow</span>
+            </div>
+            <div class="md:w-2/3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">تحليل أفكار المحتوى للسوق</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">الرجوع لقاعدة المعرفة الداخلية</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">توافق تام مع هوية الشركة (Tone of Voice)</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">إنتاج محتوى استراتيجي لا عشوائي</p></div>
+                </div>
+                <div class="bg-accent/10 border-r-4 border-accent p-4 rounded-lg">
+                    <p class="text-accent font-bold text-lg"><i class="fas fa-chess-knight ml-2"></i> تحويل السوشيال ميديا من "نشر يومي متعب" إلى "خطة استراتيجية موجهة".</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 11: Design Manager -->
+    <section class="slide bg-lightbg flex-col justify-center items-center p-8 md:p-16" id="slide-11">
+        <div class="max-w-5xl w-full flex flex-col md:flex-row gap-12 items-center bg-white p-10 rounded-3xl shadow-lg border border-gray-100 animate-slide-up">
+            <div class="md:w-1/3 flex flex-col items-center text-center border-b md:border-b-0 md:border-l border-gray-200 pb-8 md:pb-0 md:pl-8">
+                <div class="w-24 h-24 bg-teal-50 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-paint-brush text-5xl text-teal-500"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-primary mb-2">مدير التصميم بالذكاء</h2>
+                <span class="text-xs font-bold text-highlight bg-highlight/10 px-3 py-1 rounded-full">Automated Workflow</span>
+            </div>
+            <div class="md:w-2/3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">توليد أوامر (Prompts) احترافية للتصميم</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">الحفاظ الصارم على الهوية البصرية</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">إنتاج تصاميم متناسقة مع العلامة التجارية</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">ربط مباشر مع أدوات التوليد الصوري</p></div>
+                </div>
+                <div class="bg-accent/10 border-r-4 border-accent p-4 rounded-lg">
+                    <p class="text-accent font-bold text-lg"><i class="fas fa-palette ml-2"></i> يقلل الاعتماد على الاجتهاد الشخصي، ويضمن جودة موحدة للعلامة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 12: Lead Extractor -->
+    <section class="slide bg-lightbg flex-col justify-center items-center p-8 md:p-16" id="slide-12">
+        <div class="max-w-5xl w-full flex flex-col md:flex-row gap-12 items-center bg-white p-10 rounded-3xl shadow-lg border border-gray-100 animate-slide-up">
+            <div class="md:w-1/3 flex flex-col items-center text-center border-b md:border-b-0 md:border-l border-gray-200 pb-8 md:pb-0 md:pl-8">
+                <div class="w-24 h-24 bg-orange-50 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-map-marked-alt text-5xl text-orange-500"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-primary mb-2">صائد العملاء (Leads)</h2>
+                <span class="text-xs font-bold text-highlight bg-highlight/10 px-3 py-1 rounded-full">Automated Workflow</span>
+            </div>
+            <div class="md:w-2/3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">بحث آلي في Google Maps</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">فلترة الشركات حسب المدينة والنشاط</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">استخراج بيانات التواصل (هاتف، موقع)</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">حفظ تلقائي في Google Sheets / CRM</p></div>
+                </div>
+                <div class="bg-accent/10 border-r-4 border-accent p-4 rounded-lg">
+                    <p class="text-accent font-bold text-lg"><i class="fas fa-funnel-dollar ml-2"></i> توليد مئات الـ Leads الساخنة أسبوعياً لفريق المبيعات بنقرة واحدة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 13: TaskFlow -->
+    <section class="slide bg-lightbg flex-col justify-center items-center p-8 md:p-16" id="slide-13">
+        <div class="max-w-5xl w-full flex flex-col md:flex-row gap-12 items-center bg-white p-10 rounded-3xl shadow-lg border border-gray-100 animate-slide-up">
+            <div class="md:w-1/3 flex flex-col items-center text-center border-b md:border-b-0 md:border-l border-gray-200 pb-8 md:pb-0 md:pl-8">
+                <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-tasks text-5xl text-blue-600"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-primary mb-2">مساعد إدارة المهام</h2>
+                <span class="text-xs font-bold text-highlight bg-highlight/10 px-3 py-1 rounded-full">Telegram + AI Workflow</span>
+            </div>
+            <div class="md:w-2/3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">إنشاء مهام صوتياً أو نصياً عبر تيليجرام</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">جدولة ذكية للمواعيد والتذكيرات</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">إرسال إشعارات في الوقت المناسب بالضبط</p></div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl"><i class="fas fa-check-circle text-accent mt-1"></i><p class="text-gray-700 font-semibold">تنظيم وتوثيق العمل اليومي</p></div>
+                </div>
+                <div class="bg-accent/10 border-r-4 border-accent p-4 rounded-lg">
+                    <p class="text-accent font-bold text-lg"><i class="fas fa-stopwatch ml-2"></i> لا مزيد من المهام المنسية أو المتابعات الضائعة في زحمة العمل.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 14: Competitive Advantages -->
+    <section class="slide bg-white flex-col justify-center items-center p-8 md:p-16" id="slide-14">
+        <div class="max-w-6xl w-full animate-slide-up">
+            <h2 class="text-4xl font-bold text-center text-primary mb-12">المزايا التنافسية للنظام</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-lightbg border border-gray-100 p-6 rounded-2xl hover:border-secondary transition-colors">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 text-secondary text-xl"><i class="fas fa-robot"></i></div>
+                    <h3 class="font-bold text-xl mb-2">أتمتة كاملة</h3>
+                    <p class="text-gray-500 text-sm">عمليات تعمل على مدار الساعة (24/7) بدون أي تدخل بشري.</p>
+                </div>
+                
+                <div class="bg-lightbg border border-gray-100 p-6 rounded-2xl hover:border-highlight transition-colors">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4 text-highlight text-xl"><i class="fas fa-brain"></i></div>
+                    <h3 class="font-bold text-xl mb-2">ذكاء اصطناعي مدمج</h3>
+                    <p class="text-gray-500 text-sm">ليس مجرد نقل بيانات، بل تحليل وفهم واتخاذ قرار في كل خطوة.</p>
+                </div>
+
+                <div class="bg-lightbg border border-gray-100 p-6 rounded-2xl hover:border-accent transition-colors">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4 text-accent text-xl"><i class="fas fa-network-wired"></i></div>
+                    <h3 class="font-bold text-xl mb-2">ربط مركزي</h3>
+                    <p class="text-gray-500 text-sm">جميع الأقسام (مبيعات، تسويق، إدارة) تعمل في بيئة بيانات واحدة.</p>
+                </div>
+
+                <div class="bg-lightbg border border-gray-100 p-6 rounded-2xl hover:border-secondary transition-colors">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4 text-secondary text-xl"><i class="fas fa-expand-arrows-alt"></i></div>
+                    <h3 class="font-bold text-xl mb-2">قابلية التوسع</h3>
+                    <p class="text-gray-500 text-sm">يتمدد النظام بسلاسة ليناسب حجم نمو شركتك بدون إعادة برمجة.</p>
+                </div>
+
+                <div class="bg-lightbg border border-gray-100 p-6 rounded-2xl hover:border-yellow-500 transition-colors">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 text-yellow-600 text-xl"><i class="fas fa-wallet"></i></div>
+                    <h3 class="font-bold text-xl mb-2">تكلفة منخفضة</h3>
+                    <p class="text-gray-500 text-sm">تكلفة النظام أقل بكثير من توظيف فريق إضافي للأعمال الروتينية.</p>
+                </div>
+
+                <div class="bg-lightbg border border-gray-100 p-6 rounded-2xl hover:border-red-500 transition-colors">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4 text-red-500 text-xl"><i class="fas fa-tachometer-alt"></i></div>
+                    <h3 class="font-bold text-xl mb-2">سرعة تنفيذ صاروخية</h3>
+                    <p class="text-gray-500 text-sm">الردود، والتحديثات، والتقارير تتم في أجزاء من الثانية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 15: Departments -->
+    <section class="slide bg-lightbg flex-col justify-center items-center p-8 md:p-16" id="slide-15">
+        <div class="max-w-7xl w-full animate-slide-up">
+            <h2 class="text-4xl font-bold text-center text-primary mb-12">كيف يخدم النظام إدارات الشركة؟</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Management -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                    <div class="bg-slate-800 p-4 text-center">
+                        <i class="fas fa-user-tie text-3xl text-white mb-2"></i>
+                        <h3 class="text-white font-bold text-xl">الإدارة العليا</h3>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3"><i class="fas fa-chart-pie text-gray-400"></i> <span class="text-gray-700 font-semibold">تقارير لحظية وأوضح</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-eye text-gray-400"></i> <span class="text-gray-700 font-semibold">مراقبة شاملة للعمليات</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-shield-alt text-gray-400"></i> <span class="text-gray-700 font-semibold">تقليل التسرب والأخطاء</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sales -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                    <div class="bg-accent p-4 text-center">
+                        <i class="fas fa-hand-holding-usd text-3xl text-white mb-2"></i>
+                        <h3 class="text-white font-bold text-xl">المبيعات</h3>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3"><i class="fas fa-users text-gray-400"></i> <span class="text-gray-700 font-semibold">Leads جاهزة للاتصال</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-bolt text-gray-400"></i> <span class="text-gray-700 font-semibold">ردود فورية على الاستفسارات</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-calendar-check text-gray-400"></i> <span class="text-gray-700 font-semibold">متابعة آلية (Follow-up)</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Marketing -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                    <div class="bg-highlight p-4 text-center">
+                        <i class="fas fa-bullhorn text-3xl text-white mb-2"></i>
+                        <h3 class="text-white font-bold text-xl">التسويق</h3>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3"><i class="fas fa-magic text-gray-400"></i> <span class="text-gray-700 font-semibold">إنتاج محتوى أسرع وأغزر</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-comments text-gray-400"></i> <span class="text-gray-700 font-semibold">تفاعل أعلى مع الجمهور</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-fingerprint text-gray-400"></i> <span class="text-gray-700 font-semibold">هوية موحدة ومستقرة</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Operations -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                    <div class="bg-secondary p-4 text-center">
+                        <i class="fas fa-cogs text-3xl text-white mb-2"></i>
+                        <h3 class="text-white font-bold text-xl">التشغيل</h3>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3"><i class="fas fa-clipboard-list text-gray-400"></i> <span class="text-gray-700 font-semibold">مهام منظمة وواضحة</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-bell text-gray-400"></i> <span class="text-gray-700 font-semibold">تذكير تلقائي بالمواعيد</span></li>
+                            <li class="flex items-center gap-3"><i class="fas fa-compress-arrows-alt text-gray-400"></i> <span class="text-gray-700 font-semibold">تقليل الضغط الإداري</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 16: ROI -->
+    <section class="slide bg-white flex-col justify-center items-center p-8 md:p-16 relative overflow-hidden" id="slide-16">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
+        
+        <div class="max-w-5xl w-full animate-slide-up text-center">
+            <h2 class="text-4xl font-bold text-primary mb-16">العائد المتوقع على الاستثمار (ROI)</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+                <div>
+                    <h3 class="text-7xl font-extrabold text-secondary mb-4 drop-shadow-sm">70<span class="text-4xl">%</span></h3>
+                    <p class="text-xl font-bold text-gray-800">توفير في الوقت</p>
+                    <p class="text-sm text-gray-500 mt-2">تقليص الوقت التشغيلي للمهام المتكررة.</p>
+                </div>
+                <div>
+                    <h3 class="text-7xl font-extrabold text-accent mb-4 drop-shadow-sm">99<span class="text-4xl">%</span></h3>
+                    <p class="text-xl font-bold text-gray-800">دقة في التنفيذ</p>
+                    <p class="text-sm text-gray-500 mt-2">القضاء شبه الكامل على الأخطاء البشرية.</p>
+                </div>
+                <div>
+                    <h3 class="text-7xl font-extrabold text-highlight mb-4 drop-shadow-sm">2<span class="text-4xl">x</span></h3>
+                    <p class="text-xl font-bold text-gray-800">مضاعفة سرعة الرد</p>
+                    <p class="text-sm text-gray-500 mt-2">تحسين تجربة العميل ورفع معدلات التحويل.</p>
+                </div>
+            </div>
+
+            <div class="inline-block bg-gray-50 border border-gray-200 rounded-full px-8 py-4 shadow-inner">
+                <p class="text-lg font-bold text-gray-700"><i class="fas fa-info-circle text-secondary mr-2"></i> النتيجة النهائية: تقليل الحاجة لتعيين موظفين جدد للأعمال الروتينية، وتوجيه الفريق للابتكار والمبيعات.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 17: Why Now? -->
+    <section class="slide bg-primary flex-col justify-center items-center p-8 md:p-16 text-white" id="slide-17">
+        <div class="max-w-4xl w-full animate-slide-up text-center">
+            <h2 class="text-5xl font-extrabold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary">لماذا هذا النظام مهم الآن؟</h2>
+            
+            <div class="space-y-8 text-right">
+                <div class="glass-panel p-6 rounded-2xl flex items-center gap-6">
+                    <div class="bg-white/10 p-4 rounded-full"><i class="fas fa-shipping-fast text-3xl text-accent"></i></div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-1">السرعة لم تعد ميزة… بل شرط للبقاء</h3>
+                        <p class="text-gray-300">السوق يتحرك بسرعة، والعميل يتوقع رداً في نفس الثانية.</p>
+                    </div>
+                </div>
+                
+                <div class="glass-panel p-6 rounded-2xl flex items-center gap-6">
+                    <div class="bg-white/10 p-4 rounded-full"><i class="fas fa-globe text-3xl text-blue-400"></i></div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-1">المنافسة أصبحت رقمية بالكامل</h3>
+                        <p class="text-gray-300">من لا يملك بنية تحتية رقمية قوية، سيخرج من المنافسة قريباً.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl flex items-center gap-6">
+                    <div class="bg-white/10 p-4 rounded-full"><i class="fas fa-robot text-3xl text-highlight"></i></div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-1">الشركات الذكية تؤتمت… والبقية تلاحق</h3>
+                        <p class="text-gray-300">الذكاء الاصطناعي أصبح معياراً أساسياً للعمل، وليس رفاهية إضافية.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                <p class="text-2xl font-bold text-red-400 bg-red-900/30 inline-block px-6 py-3 rounded-lg border border-red-500/30">"الشركات التي لا تؤتمت عملياتها اليوم… ستدفع التكلفة مضاعفة غداً."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 18: Closing -->
+    <section class="slide bg-primary flex-col justify-center items-center p-8 md:p-16 text-white relative" id="slide-18">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent"></div>
+        
+        <div class="max-w-4xl w-full animate-slide-up text-center z-10">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">هذه المنظومة ليست مجرد أدوات...</h2>
+            <p class="text-2xl text-accent font-bold mb-12">بل نظام تشغيل متكامل لشركتك (Business Operating System).</p>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-16">
+                <span class="bg-white/10 border border-white/20 px-6 py-3 rounded-full text-lg font-semibold"><i class="fas fa-arrow-down text-accent ml-2"></i>تقلل التكلفة</span>
+                <span class="bg-white/10 border border-white/20 px-6 py-3 rounded-full text-lg font-semibold"><i class="fas fa-arrow-up text-accent ml-2"></i>تزيد الإنتاجية</span>
+                <span class="bg-white/10 border border-white/20 px-6 py-3 rounded-full text-lg font-semibold"><i class="fas fa-chart-line text-accent ml-2"></i>ترفع المبيعات</span>
+                <span class="bg-white/10 border border-white/20 px-6 py-3 rounded-full text-lg font-semibold"><i class="fas fa-sliders-h text-accent ml-2"></i>تمنحك تحكماً كاملاً</span>
+            </div>
+            
+            <div class="bg-gradient-to-r from-secondary/20 to-highlight/20 border border-white/10 p-8 rounded-3xl backdrop-blur-sm">
+                <h3 class="text-2xl font-bold mb-6 text-gray-200">الخطوة التالية:</h3>
+                <p class="text-3xl font-extrabold mb-8">لنحوّل عملك إلى نظام يعمل بكفاءة… <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-green-300">حتى عندما لا تعمل أنت. 🚀</span></p>
+                <button class="bg-gradient-to-r from-secondary to-highlight hover:from-blue-500 hover:to-purple-500 text-white font-bold text-xl py-4 px-12 rounded-full shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all transform hover:scale-105">
+                    لنبدأ التنفيذ الآن
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progress-bar');
+        const slideCounter = document.getElementById('slide-counter');
+
+        function updateUI() {
+            // Update slides visibility
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                    // Re-trigger animation by removing and adding class
+                    const content = slide.querySelector('.animate-slide-up');
+                    if (content) {
+                        content.style.animation = 'none';
+                        content.offsetHeight; /* trigger reflow */
+                        content.style.animation = null; 
+                    }
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            // Update Progress bar
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            // Update Counter
+            slideCounter.innerText = `${currentSlide + 1} / ${slides.length}`;
+            
+            // Adjust counter color based on slide background (light vs dark)
+            if ([0, 16, 17].includes(currentSlide)) {
+                slideCounter.classList.add('text-gray-400');
+                slideCounter.classList.remove('text-primary');
+            } else {
+                slideCounter.classList.remove('text-gray-400');
+                slideCounter.classList.add('text-primary');
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateUI();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateUI();
+            }
+        }
+
+        // Keyboard Navigation (RTL specific: Left arrow goes next, Right arrow goes prev)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                nextSlide();
+            } else if (e.key === 'ArrowRight') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateUI();
+    </script>
+</body>
+</html>
